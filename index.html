@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Novelist - Maikel Edition</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div id="login-screen" class="container active">
+        <h1>AI Novelist</h1>
+        <p>Crea libros épicos con Inteligencia Artificial</p>
+        <div class="form-group">
+            <input type="email" id="email" placeholder="Correo Electrónico">
+            <input type="password" id="password" placeholder="Código / Contraseña">
+            <button onclick="login()">Entrar / Registrarse</button>
+        </div>
+    </div>
+
+    <div id="dashboard-screen" class="container hidden">
+        <header>
+            <h2>Hola, <span id="user-display">Escritor</span></h2>
+            <div class="badge" id="plan-badge">Plan: GRATIS</div>
+            <button onclick="showUpgrade()" class="btn-premium">Mejorar Plan</button>
+        </header>
+
+        <div id="step-1" class="step-box">
+            <h3>1. Tu Idea</h3>
+            <textarea id="idea-input" placeholder="Ej: Un detective que viaja en el tiempo para evitar que se invente la pizza..."></textarea>
+            <button onclick="generateOutline()">Generar Estructura <i class="fas fa-magic"></i></button>
+        </div>
+
+        <div id="step-2" class="step-box hidden">
+            <h3>2. Estructura del Libro</h3>
+            <div id="chapters-list"></div>
+            <button class="btn-secondary" onclick="addChapter()">+ Añadir Capítulo Manual</button>
+            <button onclick="goToSettings()">Siguiente: Configuración <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div id="step-3" class="step-box hidden">
+            <h3>3. Configuración de Escritura</h3>
+            <div class="grid-options">
+                <select id="opt-length">
+                    <option value="corto">Corto</option>
+                    <option value="normal">Normal</option>
+                    <option value="largo">Largo</option>
+                    <option value="epico" disabled>Épicamente Largo (Solo PRO)</option>
+                </select>
+                <select id="opt-pov">
+                    <option value="1ra persona">1ra Persona (Yo)</option>
+                    <option value="3ra persona">3ra Persona</option>
+                    <option value="omnisciente">Omnisciente</option>
+                </select>
+                <select id="opt-style">
+                    <option value="automatico">Automático (IA)</option>
+                    <option value="stephen king">Estilo Terror/Suspenso</option>
+                    <option value="garcia marquez">Realismo Mágico</option>
+                </select>
+                <input type="text" id="opt-audience" placeholder="Público (Ej: Jóvenes Adultos)">
+            </div>
+            <button onclick="startWriting()">¡ESCRIBIR LIBRO!</button>
+        </div>
+
+        <div id="step-4" class="step-box hidden">
+            <h3>Tu Libro</h3>
+            <div id="book-content" contenteditable="true">
+                </div>
+            <div class="toolbar">
+                <button onclick="modifySelection()">Modificar con IA</button>
+                <button onclick="exportFormat('pdf')">Descargar PDF</button>
+                <button onclick="exportFormat('word')">Descargar Word</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="payment-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Hazte Premium</h3>
+            <p>Accede a libros Épicamente Largos y exportación CBR.</p>
+            <p>Precio: $9.99 USD</p>
+            <p>Enviar pago vía PayPal a: <strong>ballstefanie7@gmail.com</strong></p>
+            <button onclick="processPayment('paypal')">Pagar con PayPal</button>
+            <button onclick="closeModal()">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
